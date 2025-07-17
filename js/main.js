@@ -140,11 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Draggable chatbot toggle button
-  const securebotToggle = document.getElementById('securebot-toggle');
   let isDragging = false;
   let dragOffsetX = 0;
   let dragOffsetY = 0;
 
+  const securebotToggle = document.getElementById('securebot-toggle');
   securebotToggle.style.position = 'fixed';
 
   securebotToggle.addEventListener('mousedown', (e) => {
