@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SecureLink – Built by Primers</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="overlay">
+      <h1>SecureLink</h1>
+      <p>Next-generation emergency response systems. Trusted by Africa’s institutions.</p>
+      <a class="btn" id="learnMoreBtn">Learn More</a>
+    </div>
+  </header>
+
+  <!-- Modal Structure -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeModal">&times;</span>
+      <h2>About SecureLink</h2>
+      <p>SecureLink is a next-generation emergency response system designed to keep you safe and connected. Our platform integrates multiple devices and communication channels to ensure rapid and reliable alerts.</p>
+    </div>
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div style="position: fixed; top: 10px; right: 10px; z-index: 10000;">
+    <label for="toggle">Light/Dark Mode</label>
+    <input class="pristine" type="checkbox" id="toggle" name="toggle" value="on" />
+  </div>
+
+  <!-- Chatbot Side Panel -->
+  <div id="securebot" class="chatbot">
+    <div class="chatbot-header">
+      <h3>SecureBot</h3>
+      <button id="securebot-close" aria-label="Close SecureBot">&times;</button>
+    </div>
+    <div class="chatbot-messages" id="securebot-messages"></div>
+    <form id="securebot-form" class="chatbot-form">
+      <input type="text" id="securebot-input" placeholder="Ask me about SecureLink..." autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <button id="securebot-toggle" class="chatbot-toggle" aria-label="Open SecureBot">Chat</button>
+
+  <main class="content">
+    <section id="about">
+      <h2>Why SecureLink?</h2>
+      <p>SecureLink, a project under <strong>Primers Organisation</strong>, delivers multi-device emergency broadcast systems across Africa, designed for speed, security, and sovereignty.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>📞 +234-800-SECURE &nbsp;|&nbsp; ✉️ <a href="mailto:securelink.primersorganization@gmail.com">securelink.primersorganization@gmail.com</a></p>
+    <p>&copy; 2025 SecureLink — <a href="https://primersorganization.ng.com">primersorganization.ng.com</a></p>
+  </footer>
+</body>
+</html>
