@@ -1,7 +1,7 @@
 .chatbot {
   position: fixed;
   bottom: 70px;
-  right: 20px;
+  right: 70px; /* Adjusted to make room for the side button */
   width: 320px;
   max-width: 90vw;
   height: 400px;
@@ -118,4 +118,28 @@
   .chatbot-form input[type="text"] {
     font-size: 0.9rem;
   }
+}
+
+/* Chatbot toggle button positioned vertically on the right side */
+.chatbot-toggle {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 20px 0 0 20px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 170, 255, 0.5);
+  z-index: 1300;
+  transition: background-color 0.3s ease;
+}
+
+.chatbot-toggle:hover,
+.chatbot-toggle:focus {
+  background-color: #0088cc;
+  outline: none;
 }
