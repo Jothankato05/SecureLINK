@@ -139,6 +139,81 @@ document.addEventListener('DOMContentLoaded', () => {
     newsletterForm.reset();
   });
 
+  // Draggable chatbot toggle button
+  const securebotToggle = document.getElementById('securebot-toggle');
+  let isDragging = false;
+  let dragOffsetX = 0;
+  let dragOffsetY = 0;
+
+  securebotToggle.style.position = 'fixed';
+
+  securebotToggle.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    dragOffsetX = e.clientX - securebotToggle.getBoundingClientRect().left;
+    dragOffsetY = e.clientY - securebotToggle.getBoundingClientRect().top;
+    securebotToggle.style.transition = 'none';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      let newX = e.clientX - dragOffsetX;
+      let newY = e.clientY - dragOffsetY;
+
+      // Constrain within viewport
+      const maxX = window.innerWidth - securebotToggle.offsetWidth;
+      const maxY = window.innerHeight - securebotToggle.offsetHeight;
+      newX = Math.min(Math.max(0, newX), maxX);
+      newY = Math.min(Math.max(0, newY), maxY);
+
+      securebotToggle.style.left = newX + 'px';
+      securebotToggle.style.top = newY + 'px';
+      securebotToggle.style.right = 'auto';
+      securebotToggle.style.bottom = 'auto';
+    }
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (isDragging) {
+      isDragging = false;
+      securebotToggle.style.transition = '';
+    }
+  });
+
+  // Touch events for mobile
+  securebotToggle.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    const touch = e.touches[0];
+    dragOffsetX = touch.clientX - securebotToggle.getBoundingClientRect().left;
+    dragOffsetY = touch.clientY - securebotToggle.getBoundingClientRect().top;
+    securebotToggle.style.transition = 'none';
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    if (isDragging) {
+      const touch = e.touches[0];
+      let newX = touch.clientX - dragOffsetX;
+      let newY = touch.clientY - dragOffsetY;
+
+      // Constrain within viewport
+      const maxX = window.innerWidth - securebotToggle.offsetWidth;
+      const maxY = window.innerHeight - securebotToggle.offsetHeight;
+      newX = Math.min(Math.max(0, newX), maxX);
+      newY = Math.min(Math.max(0, newY), maxY);
+
+      securebotToggle.style.left = newX + 'px';
+      securebotToggle.style.top = newY + 'px';
+      securebotToggle.style.right = 'auto';
+      securebotToggle.style.bottom = 'auto';
+    }
+  });
+
+  document.addEventListener('touchend', () => {
+    if (isDragging) {
+      isDragging = false;
+      securebotToggle.style.transition = '';
+    }
+  });
+
   // Light/Dark mode toggle
   const toggle = document.getElementById('toggle');
   toggle.addEventListener('change', () => {
