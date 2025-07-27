@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
   });
-
-  window.addEventListener('click', (event) => {
+0.
+  window.addEventListener('click', (event) => {z
     if (event.target === modal) {
       modal.style.display = 'none';
       modal.setAttribute('aria-hidden', 'true');
@@ -140,11 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Draggable chatbot toggle button
+  const securebotToggle = document.getElementById('securebot-toggle');
   let isDragging = false;
   let dragOffsetX = 0;
   let dragOffsetY = 0;
 
-  const securebotToggle = document.getElementById('securebot-toggle');
   securebotToggle.style.position = 'fixed';
 
   securebotToggle.addEventListener('mousedown', (e) => {
@@ -214,42 +214,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Light/Dark mode toggle
-  const toggle = document.getElementById('toggle');
-  toggle.addEventListener('change', () => {
-    if (toggle.checked) {
-      document.body.classList.add('light-mode');
-      document.body.classList.remove('dark-mode');
-      toggle.setAttribute('aria-checked', 'true');
-      localStorage.setItem('colorMode', 'light');
-    } else {
-      document.body.classList.add('dark-mode');
-      document.body.classList.remove('light-mode');
-      toggle.setAttribute('aria-checked', 'false');
-      localStorage.setItem('colorMode', 'dark');
-    }
-  });
-
-  // Initialize mode based on saved preference or system preference
-  const savedMode = localStorage.getItem('colorMode');
-  if (savedMode === 'light') {
-    toggle.checked = true;
-    document.body.classList.add('light-mode');
-    toggle.setAttribute('aria-checked', 'true');
-  } else if (savedMode === 'dark') {
-    toggle.checked = false;
-    document.body.classList.add('dark-mode');
-    toggle.setAttribute('aria-checked', 'false');
-  } else {
-    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-    if (prefersLight) {
-      toggle.checked = true;
-      document.body.classList.add("light-mode");
-      toggle.setAttribute('aria-checked', 'true');
-    } else {
-      toggle.checked = false;
-      document.body.classList.add("dark-mode");
-      toggle.setAttribute('aria-checked', 'false');
-    }
-  }
+  // Light/Dark mode toggle removed
 });
