@@ -144,8 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newsletterForm.reset();
   });
 
-  // Draggable chatbot toggle button
-  // Remove toggle button and make chatbot always open
+  // Remove toggle button and make chatbot always open and non-draggable
   const securebot = document.getElementById('securebot');
   const securebotClose = document.getElementById('securebot-close');
   const securebotMessages = document.getElementById('securebot-messages');
@@ -160,6 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (securebotToggle) {
     securebotToggle.remove();
   }
+
+  // Remove draggable styles or event listeners if any (assuming draggable was on toggle)
+  // Since toggle is removed, no draggable functionality remains
 
   securebotClose.addEventListener('click', () => {
     securebot.classList.remove('open');
