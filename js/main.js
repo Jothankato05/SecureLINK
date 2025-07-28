@@ -61,6 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
     "contact": "You can contact SecureLink at securelink.primersorganization@gmail.com or call +234-800-SECURE.",
     "features": "SecureLink offers real-time SOS alerts, live geolocation broadcasting, trusted contact management, emergency dashboards, data analytics, and multilingual support.",
     "security": "SecureLink uses end-to-end encryption and anonymizes user alerts to ensure privacy and security.",
+    "pricing": "SecureLink offers flexible pricing plans tailored to the needs of institutions across Africa. Contact sales for detailed information.",
+    "support": "Our support team is available 24/7 to assist with any issues or questions you may have.",
+    "integration": "SecureLink integrates seamlessly with existing emergency management systems and communication platforms.",
+    "training": "We provide comprehensive training programs to ensure your team can effectively use SecureLink.",
+    "compliance": "SecureLink complies with international standards for data security and emergency response protocols.",
     "default": "I'm sorry, I don't have information on that. Please ask about SecureLink."
   };
 
@@ -140,78 +145,71 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Draggable chatbot toggle button
+  // Remove toggle button and make chatbot always open
+  const securebot = document.getElementById('securebot');
+  const securebotClose = document.getElementById('securebot-close');
+  const securebotMessages = document.getElementById('securebot-messages');
+  const securebotForm = document.getElementById('securebot-form');
+  const securebotInput = document.getElementById('securebot-input');
+
+  // Show chatbot by default
+  securebot.classList.add('open');
+
+  // Remove toggle button element if exists
   const securebotToggle = document.getElementById('securebot-toggle');
-  let isDragging = false;
-  let dragOffsetX = 0;
-  let dragOffsetY = 0;
+  if (securebotToggle) {
+    securebotToggle.remove();
+  }
 
-  securebotToggle.style.position = 'fixed';
-
-  securebotToggle.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    dragOffsetX = e.clientX - securebotToggle.getBoundingClientRect().left;
-    dragOffsetY = e.clientY - securebotToggle.getBoundingClientRect().top;
-    securebotToggle.style.transition = 'none';
+  securebotClose.addEventListener('click', () => {
+    securebot.classList.remove('open');
   });
 
-  document.addEventListener('mousemove', (e) => {
-    if (isDragging) {
-      let newX = e.clientX - dragOffsetX;
-      let newY = e.clientY - dragOffsetY;
+  // Expanded chatbot knowledge base with context awareness and fallback
+  const knowledgeBase = {
+    "what is securelink": "SecureLink is a next-generation emergency response system designed to keep you safe and connected. It integrates multiple devices and communication channels to ensure rapid and reliable alerts.",
+    "who built securelink": "SecureLink is built by Primers Organisation, a trusted institution in Africa.",
+    "how does securelink work": "SecureLink delivers multi-device emergency broadcast systems across Africa, designed for speed, security, and sovereignty.",
+    "contact": "You can contact SecureLink at securelink.primersorganization@gmail.com or call +234-800-SECURE.",
+    "features": "SecureLink offers real-time SOS alerts, live geolocation broadcasting, trusted contact management, emergency dashboards, data analytics, and multilingual support.",
+    "security": "SecureLink uses end-to-end encryption and anonymizes user alerts to ensure privacy and security.",
+    "default": "I'm sorry, I don't have information on that. Please ask about SecureLink."
+  };
 
-      // Constrain within viewport
-      const maxX = window.innerWidth - securebotToggle.offsetWidth;
-      const maxY = window.innerHeight - securebotToggle.offsetHeight;
-      newX = Math.min(Math.max(0, newX), maxX);
-      newY = Math.min(Math.max(0, newY), maxY);
+  let conversationContext = [];
 
-      securebotToggle.style.left = newX + 'px';
-      securebotToggle.style.top = newY + 'px';
-      securebotToggle.style.right = 'auto';
-      securebotToggle.style.bottom = 'auto';
+  function addMessage(text, sender) {
+    const msg = document.createElement('div');
+    msg.classList.add('chatbot-message', sender);
+    msg.textContent = text;
+    securebotMessages.appendChild(msg);
+    securebotMessages.scrollTop = securebotMessages.scrollHeight;
+  }
+
+  function getResponse(input) {
+    input = input.toLowerCase();
+    for (const key in knowledgeBase) {
+      if (input.includes(key)) {
+        return knowledgeBase[key];
+      }
     }
-  });
-
-  document.addEventListener('mouseup', () => {
-    if (isDragging) {
-      isDragging = false;
-      securebotToggle.style.transition = '';
+    // Fallback response with context awareness (simple example)
+    if (conversationContext.length > 0) {
+      return "Let's continue our conversation. How else can I assist you?";
     }
-  });
+    return knowledgeBase["default"];
+  }
 
-  // Touch events for mobile
-  securebotToggle.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    const touch = e.touches[0];
-    dragOffsetX = touch.clientX - securebotToggle.getBoundingClientRect().left;
-    dragOffsetY = touch.clientY - securebotToggle.getBoundingClientRect().top;
-    securebotToggle.style.transition = 'none';
-  });
+  securebotForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const userInput = securebotInput.value.trim();
+    if (!userInput) return;
+    addMessage(userInput, 'user');
+    securebotInput.value = '';
+    conversationContext.push(userInput);
 
-  document.addEventListener('touchmove', (e) => {
-    if (isDragging) {
-      const touch = e.touches[0];
-      let newX = touch.clientX - dragOffsetX;
-      let newY = touch.clientY - dragOffsetY;
-
-      // Constrain within viewport
-      const maxX = window.innerWidth - securebotToggle.offsetWidth;
-      const maxY = window.innerHeight - securebotToggle.offsetHeight;
-      newX = Math.min(Math.max(0, newX), maxX);
-      newY = Math.min(Math.max(0, newY), maxY);
-
-      securebotToggle.style.left = newX + 'px';
-      securebotToggle.style.top = newY + 'px';
-      securebotToggle.style.right = 'auto';
-      securebotToggle.style.bottom = 'auto';
-    }
-  });
-
-  document.addEventListener('touchend', () => {
-    if (isDragging) {
-      isDragging = false;
-      securebotToggle.style.transition = '';
-    }
+    const response = getResponse(userInput);
+    setTimeout(() => addMessage(response, 'bot'), 500);
   });
 
   // Light/Dark mode toggle removed
