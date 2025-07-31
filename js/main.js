@@ -1,8 +1,12 @@
+import { initThemeToggle } from './utils.js';
+
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
+
   // Smooth scroll for in-page anchor links
   const links = document.querySelectorAll('a[href^="#"]');
   links.forEach(link => {
-    if (link.id === 'learnMoreBtn') return; // Skip smooth scroll for Learn More button
+    if (link.id === 'learnMoreBtn') return;
     link.addEventListener('click', e => {
       e.preventDefault();
       const target = document.querySelector(link.getAttribute('href'));
@@ -20,118 +24,113 @@ document.addEventListener('DOMContentLoaded', () => {
   openModalBtn.addEventListener('click', () => {
     modal.style.display = 'block';
     modal.setAttribute('aria-hidden', 'false');
+    const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    const firstFocusable = focusableElements[0];
+    firstFocusable.focus();
+    modal.addEventListener('keydown', trapFocus);
   });
 
   closeModalBtn.addEventListener('click', () => {
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
+    modal.removeEventListener('keydown', trapFocus);
   });
-0.
-  window.addEventListener('click', (event) => {z
+
+  window.addEventListener('click', (event) => {
     if (event.target === modal) {
       modal.style.display = 'none';
       modal.setAttribute('aria-hidden', 'true');
+      modal.removeEventListener('keydown', trapFocus);
     }
   });
 
-  // Chatbot functionality
-  // Removed chatbot functionality as per user request
-
-  // FAQ collapsible functionality
-  const faqItems = document.querySelectorAll('#faq dt');
-  faqItems.forEach(item => {
-    item.addEventListener('click', () => {
-      const expanded = item.getAttribute('aria-expanded') === 'true';
-      item.setAttribute('aria-expanded', !expanded);
-      const dd = item.nextElementSibling;
-      if (dd) {
-        dd.style.display = expanded ? 'none' : 'block';
+  function trapFocus(e) {
+    const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
-    });
-    item.setAttribute('tabindex', '0');
-    item.setAttribute('role', 'button');
-    item.setAttribute('aria-expanded', 'false');
-  });
-
-  // Newsletter form validation
-  const newsletterForm = document.getElementById('newsletter-form');
-  const newsletterEmail = document.getElementById('newsletter-email');
-  const newsletterError = document.getElementById('newsletter-error');
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
+    }
   }
 
-  newsletterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = newsletterEmail.value.trim();
-    if (!validateEmail(email)) {
-      newsletterError.textContent = 'Please enter a valid email address.';
-      newsletterEmail.focus();
-      return;
-    }
-    newsletterError.textContent = '';
-    alert('Thank you for subscribing to our newsletter!');
-    newsletterForm.reset();
-  });
-
-  // Remove toggle button and make chatbot always open and non-draggable
+  // Chatbot functionality
   const securebot = document.getElementById('securebot');
+  const securebotToggle = document.getElementById('securebot-toggle');
   const securebotClose = document.getElementById('securebot-close');
   const securebotMessages = document.getElementById('securebot-messages');
   const securebotForm = document.getElementById('securebot-form');
   const securebotInput = document.getElementById('securebot-input');
+  const securebotVoice = document.getElementById('securebot-voice');
+  let history = [];
 
-  // Show chatbot by default
-  securebot.classList.add('open');
-
-  // Remove toggle button element if exists
-  const securebotToggle = document.getElementById('securebot-toggle');
-  if (securebotToggle) {
-    securebotToggle.remove();
-  }
-
-  // Remove draggable styles or event listeners if any (assuming draggable was on toggle)
-  // Since toggle is removed, no draggable functionality remains
+  securebotToggle.addEventListener('click', () => {
+    securebot.classList.add('open');
+    securebotToggle.style.display = 'none';
+    securebotInput.focus();
+  });
 
   securebotClose.addEventListener('click', () => {
     securebot.classList.remove('open');
+    securebotToggle.style.display = 'block';
   });
 
-  // Expanded chatbot knowledge base with context awareness and fallback
   const knowledgeBase = {
     "what is securelink": "SecureLink is a next-generation emergency response system designed to keep you safe and connected. It integrates multiple devices and communication channels to ensure rapid and reliable alerts.",
     "who built securelink": "SecureLink is built by Primers Organisation, a trusted institution in Africa.",
     "how does securelink work": "SecureLink delivers multi-device emergency broadcast systems across Africa, designed for speed, security, and sovereignty.",
     "contact": "You can contact SecureLink at securelink.primersorganization@gmail.com or call +234-800-SECURE.",
-    "features": "SecureLink offers real-time SOS alerts, live geolocation broadcasting, trusted contact management, emergency dashboards, data analytics, and multilingual support.",
-    "security": "SecureLink uses end-to-end encryption and anonymizes user alerts to ensure privacy and security.",
-    "default": "I'm sorry, I don't have information on that. Please ask about SecureLink."
+    "default": "I'm sorry, I don't have information on that. Please ask about SecureLink or say 'help' for emergency assistance."
   };
-
-  let conversationContext = [];
 
   function addMessage(text, sender) {
     const msg = document.createElement('div');
-    msg.classList.add('chatbot-message', sender);
+    msg.classList.add('securebot-message', sender);
     msg.textContent = text;
     securebotMessages.appendChild(msg);
     securebotMessages.scrollTop = securebotMessages.scrollHeight;
   }
 
-  function getResponse(input) {
+  function respond(input) {
+    history.push(input);
     input = input.toLowerCase();
+
+    if (input.includes('danger') || input.includes('followed') || input.includes('robbery') || input.includes('kidnap')) {
+      const locations = ['Wuse II', 'Gwarimpa', 'Ikeja', 'Zaria', 'Bodija'];
+      const loc = locations[Math.floor(Math.random() * locations.length)];
+      addMessage(`📡 SOS simulated: "I'm in danger at ${loc}. Please help me!"`, 'bot');
+      return 'Stay calm. Move to a safe or busy place immediately. SOS simulated.';
+    }
+
+    if (input.includes('cut') || input.includes('bleeding') || input.includes('burn') || input.includes('injury')) {
+      return 'Use clean water to rinse. Apply pressure. Cover with cloth. Remain calm.';
+    }
+
+    if (input.includes('help') || input.includes('panic') || input.includes('afraid') || input.includes('scared')) {
+      const calm = [
+        'You’re not alone. I’m with you. Stay calm.',
+        'Just breathe. Find a place with people.',
+        'You’re strong. You’ve got this. Move carefully.'
+      ];
+      return calm[Math.floor(Math.random() * calm.length)];
+    }
+
+    if (input.includes('police')) {
+      return 'Police stations are often near LGA HQs or busy roads. Look for signboards or ask a local.';
+    }
+
     for (const key in knowledgeBase) {
       if (input.includes(key)) {
         return knowledgeBase[key];
       }
     }
-    // Fallback response with context awareness (simple example)
-    if (conversationContext.length > 0) {
-      return "Let's continue our conversation. How else can I assist you?";
-    }
-    return knowledgeBase["default"];
+
+    return knowledgeBase['default'];
   }
 
   securebotForm.addEventListener('submit', (e) => {
@@ -140,11 +139,52 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!userInput) return;
     addMessage(userInput, 'user');
     securebotInput.value = '';
-    conversationContext.push(userInput);
-
-    const response = getResponse(userInput);
-    setTimeout(() => addMessage(response, 'bot'), 500);
+    setTimeout(() => {
+      const response = respond(userInput);
+      addMessage(response, 'bot');
+      securebotSpeak(response);
+    }, 500);
   });
 
-  // Light/Dark mode toggle removed
+  securebotVoice.addEventListener('click', () => {
+    securebotListen();
+  });
+
+  function securebotSpeak(text) {
+    if (!window.speechSynthesis) return;
+    const utter = new SpeechSynthesisUtterance(text);
+    speechSynthesis.onvoiceschanged = () => {
+      utter.voice = speechSynthesis.getVoices().find(v => v.lang.includes('en')) || null;
+      speechSynthesis.speak(utter);
+    };
+    speechSynthesis.getVoices();
+  }
+
+  function securebotListen() {
+    if (!('webkitSpeechRecognition' in window)) {
+      addMessage('Voice input not supported in this browser.', 'bot');
+      return;
+    }
+    const recog = new webkitSpeechRecognition();
+    recog.lang = 'en-US';
+    recog.interimResults = false;
+    recog.maxAlternatives = 1;
+    recog.onresult = (event) => {
+      const result = event.results[0][0].transcript;
+      addMessage(result, 'user');
+      const response = respond(result);
+      addMessage(response, 'bot');
+      securebotSpeak(response);
+    };
+    recog.onerror = () => {
+      addMessage('Voice recognition failed. Please try again.', 'bot');
+    };
+    recog.start();
+  }
+
+  // Greeting on load
+  setTimeout(() => {
+    addMessage('Hi, I’m SecureBot. I’m here to help with SecureLink info or emergency assistance. How can I assist you?', 'bot');
+    securebotSpeak('Hi, I’m SecureBot. I’m here to help with SecureLink info or emergency assistance. How can I assist you?');
+  }, 600);
 });

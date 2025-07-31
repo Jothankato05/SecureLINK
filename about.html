@@ -1,52 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About – SecureLink</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-  <script defer src="js/about.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about SecureLink, a mission-driven company under Primers Organisation building a safer digital and physical world.">
+  <meta name="keywords" content="SecureLink, about, emergency response, Nigeria, safety">
+  <meta property="og:title" content="About SecureLink">
+  <meta property="og:description" content="Discover SecureLink’s mission, team, and vision for a safer world through innovative emergency response technology.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://primersorganization.ng.com/about">
+  <title>About SecureLink</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
-    <a href="index.html" class="nav-link">Home</a>
-    <a href="about.html" class="nav-link active" aria-current="page">About</a>
-    <a href="services.html" class="nav-link">Services</a>
-    <a href="blog.html" class="nav-link">Blog</a>
-    <a href="contact.html" class="nav-link">Contact</a>
+  <nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
   </nav>
 
-  <main class="content" role="main">
-    <section id="about-securelink" class="animate__animated animate__fadeIn">
-      <h2>About SecureLink</h2>
+  <main class="content">
+    <section id="about">
+      <h1>About SecureLink</h1>
       <p>SecureLink is a mission-driven company founded under Primers Organisation to build a safer digital and physical world. Our platform connects vulnerable individuals with trusted responders using real-time broadcast technology across mobile, web, and USSD platforms.</p>
       <p>Headquartered in Nigeria, we collaborate with universities, emergency response units, and telecoms to deploy our system where it’s needed most.</p>
-      <div class="team-section">
-        <h3>Our Team</h3>
-        <p>Meet the dedicated professionals behind SecureLink:</p>
-        <ul>
-          <li><strong>Jothan Jerry Kato</strong> - CEO</li>
-          <li><strong>Daniel Osigbodi</strong> - CTO</li>
-          <li><strong>Aaron Chibueze</strong> - Lead Developer</li>
-          <li><strong>Hamza Riaz</strong> - Product Manager</li>
-          <li><strong>Anointed Ekabua</strong> - CFO</li>
-        </ul>
+    </section>
+
+    <section id="team">
+      <h2>Our Team</h2>
+      <p>Meet the dedicated professionals behind SecureLink:</p>
+      <div class="team-list">
+        <article class="team-member">
+          <h3>Jothan Jerry Kato</h3>
+          <p>CEO</p>
+        </article>
+        <article class="team-member">
+          <h3>Daniel Osigbodi</h3>
+          <p>CTO</p>
+        </article>
+        <article class="team-member">
+          <h3>Aaron Chibueze</h3>
+          <p>Lead Developer</p>
+        </article>
+        <article class="team-member">
+          <h3>Hamza Riaz</h3>
+          <p>Product Manager</p>
+        </article>
+        <article class="team-member">
+          <h3>Anointed Ekabua</h3>
+          <p>CFO</p>
+        </article>
       </div>
-      <div class="mission-vision">
-        <h3>Mission & Vision</h3>
-        <p>Our mission is to create a safer world through innovative emergency response technology.</p>
-        <p>We envision a future where everyone has immediate access to trusted help, anytime, anywhere.</p>
-      </div>
+    </section>
+
+    <section id="mission-vision">
+      <h2>Mission & Vision</h2>
+      <p><strong>Mission:</strong> To create a safer world through innovative emergency response technology.</p>
+      <p><strong>Vision:</strong> A future where everyone has immediate access to trusted help, anytime, anywhere.</p>
     </section>
   </main>
 
-  <footer role="contentinfo">
+  <footer>
     <p>📞 +234-800-SECURE | ✉️ <a href="mailto:securelink.primersorganization@gmail.com">securelink.primersorganization@gmail.com</a></p>
-    <p>&copy; 2025 SecureLink – <a href="https://primersorganization.ng.com">primersorganization.ng.com</a></p>
+    <p>© 2025 SecureLink – <a href="https://primersorganization.ng.com">primersorganization.ng.com</a></p>
   </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SecureLink",
+    "url": "https://primersorganization.ng.com",
+    "email": "securelink.primersorganization@gmail.com",
+    "telephone": "+234-800-SECURE",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "NG",
+      "addressRegion": "Nigeria"
+    },
+    "member": [
+      { "@type": "Person", "name": "Jothan Jerry Kato", "jobTitle": "CEO" },
+      { "@type": "Person", "name": "Daniel Osigbodi", "jobTitle": "CTO" },
+      { "@type": "Person", "name": "Aaron Chibueze", "jobTitle": "Lead Developer" },
+      { "@type": "Person", "name": "Hamza Riaz", "jobTitle": "Product Manager" },
+      { "@type": "Person", "name": "Anointed Ekabua", "jobTitle": "CFO" }
+    ]
+  }
+  </script>
 </body>
 </html>

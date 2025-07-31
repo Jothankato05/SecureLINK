@@ -1,136 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SecureLink – Built by Primers</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-  <script defer src="js/main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SecureLink: Next-generation emergency response system for Africa with real-time SOS alerts and geolocation.">
+  <meta name="keywords" content="emergency response, SecureLink, Nigeria, geolocation, safety">
+  <meta property="og:title" content="SecureLink - Emergency Response System">
+  <meta property="og:description" content="Connect with trusted responders instantly using SecureLink’s real-time emergency broadcast technology.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://primersorganization.ng.com">
+  <title>SecureLink - Emergency Response System</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="module" src="/js/main.js"></script>
 </head>
 <body>
   <header class="hero">
     <div class="overlay">
-      <h1 class="animate__animated animate__fadeInDown">SecureLink</h1>
-      <p class="animate__animated animate__fadeIn animate__delay-1s">Next-generation emergency response systems. Trusted by Africa’s institutions.</p>
-      <a class="btn animate__animated animate__pulse animate__infinite" id="learnMoreBtn">Learn More</a>
+      <h1>SecureLink</h1>
+      <p>Next-generation emergency response systems. Trusted by Africa’s institutions.</p>
+      <button id="learnMoreBtn" class="btn">Learn More</button>
     </div>
   </header>
 
-  <!-- Modal Structure -->
-  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+  <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-content">
-      <button class="close-button" id="closeModal" aria-label="Close Modal">&times;</button>
-      <h2 id="modalTitle">About SecureLink</h2>
-      <p id="modalDesc">SecureLink is a next-generation emergency response system designed to keep you safe and connected. Our platform integrates multiple devices and communication channels to ensure rapid and reliable alerts.</p>
+      <span id="closeModal" class="close-button">&times;</span>
+      <h2>About SecureLink</h2>
+      <p>SecureLink is a next-generation emergency response system designed to keep you safe and connected. Our platform integrates multiple devices and communication channels to ensure rapid and reliable alerts.</p>
     </div>
   </div>
 
-  <nav class="navbar" role="navigation" aria-label="Primary Navigation">
-    <a href="index.html" class="nav-link active" aria-current="page">Home</a>
-    <a href="about.html" class="nav-link">About</a>
-    <a href="services.html" class="nav-link">Services</a>
-    <a href="blog.html" class="nav-link">Blog</a>
-    <a href="contact.html" class="nav-link">Contact</a>
+  <nav class="navbar">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
   </nav>
 
-  <main class="content" role="main">
-    <section id="about" class="animate__animated animate__fadeIn">
+  <div>
+    <label for="toggle">Light/Dark Mode</label>
+    <input type="checkbox" id="toggle" name="toggle" aria-label="Toggle light/dark mode">
+  </div>
+
+  <div id="securebot" role="dialog" aria-label="SecureBot Chat">
+    <div class="chatbot-header">
+      SecureBot
+      <button id="securebot-close" aria-label="Close Chatbot">&times;</button>
+    </div>
+    <div id="securebot-messages" class="chatbot-messages" aria-live="polite"></div>
+    <form id="securebot-form" class="chatbot-form">
+      <input type="text" id="securebot-input" placeholder="Type your message..." aria-label="Chatbot input">
+      <button type="submit">Send</button>
+      <button type="button" class="voice-btn" id="securebot-voice" aria-label="Voice input">🎤</button>
+    </form>
+  </div>
+  <button id="securebot-toggle" class="chatbot-toggle" aria-label="Open Chatbot">Chat</button>
+
+  <main class="content">
+    <section id="why-securelink">
       <h2>Why SecureLink?</h2>
-      <p>SecureLink, a project under <strong>Primers Organisation</strong>, delivers multi-device emergency broadcast systems across Africa, designed for speed, security, and sovereignty.</p>
-    </section>
-
-    <section id="features" class="animate__animated animate__fadeInUp">
-      <h2>Features</h2>
-      <div class="feature-list">
-        <article class="feature-item">
-          <img src="images/real-time.svg" alt="Real-Time Alerts Icon" loading="lazy" />
-          <h3>Real-Time SOS Alerts</h3>
-          <p>Instantly send panic alerts via mobile, web, and USSD platforms to trusted contacts and emergency responders.</p>
-        </article>
-        <article class="feature-item">
-          <img src="images/geolocation.svg" alt="Geolocation Icon" loading="lazy" />
-          <h3>Live Geolocation Broadcasting</h3>
-          <p>Broadcast your exact location in real-time to responders for rapid assistance.</p>
-        </article>
-        <article class="feature-item">
-          <img src="images/contact-network.svg" alt="Contact Network Icon" loading="lazy" />
-          <h3>Trusted Contact Network</h3>
-          <p>Manage your personal or institutional alert recipients with customizable notification preferences.</p>
-        </article>
-        <article class="feature-item">
-          <img src="images/dashboard.svg" alt="Dashboard Icon" loading="lazy" />
-          <h3>Emergency Dashboards</h3>
-          <p>Comprehensive dashboards for campus and government emergency teams to monitor incidents and coordinate responses.</p>
-        </article>
-        <article class="feature-item">
-          <img src="images/analytics.svg" alt="Analytics Icon" loading="lazy" />
-          <h3>Data Analytics</h3>
-          <p>Advanced heatmaps, response tracking, and incident clustering to improve emergency preparedness and resource allocation.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="user-stories" class="animate__animated animate__fadeIn">
-      <h2>User Stories</h2>
-      <article>
-        <h3>Saving Lives on the Road</h3>
-        <p>When a motorist was stranded on a remote highway, SecureLink’s live geolocation feature helped emergency responders locate and assist him within minutes.</p>
-      </article>
-      <article>
-        <h3>Community Safety Network</h3>
-        <p>Neighborhood watch groups use SecureLink to coordinate rapid responses to local emergencies, improving safety and trust.</p>
-      </article>
-    </section>
-
-    <section id="case-studies" class="animate__animated animate__fadeInUp">
-      <h2>Case Studies</h2>
-      <article>
-        <h3>University Campus Deployment</h3>
-        <p>SecureLink was deployed across multiple universities, enhancing campus safety and reducing emergency response times by 40%.</p>
-      </article>
-      <article>
-        <h3>Government Emergency Coordination</h3>
-        <p>Partnering with local governments, SecureLink improved coordination among emergency teams during natural disasters.</p>
-      </article>
-    </section>
-
-    <section id="faq" class="animate__animated animate__fadeIn">
-      <h2>Frequently Asked Questions</h2>
-      <dl>
-        <dt tabindex="0">How do I trigger an SOS alert?</dt>
-        <dd>Use the mobile app, web platform, or USSD code to send an SOS alert instantly.</dd>
-        <dt tabindex="0">Is my location shared securely?</dt>
-        <dd>Yes, all location data is encrypted and only shared with verified responders.</dd>
-        <dt tabindex="0">Can I customize my trusted contacts?</dt>
-        <dd>Yes, you can manage your trusted contact list in your profile settings.</dd>
-        <dt tabindex="0">Does SecureLink support multiple languages?</dt>
-        <dd>Yes, SecureLink supports Pidgin, Hausa, Igbo, and Yoruba languages.</dd>
-      </dl>
-    </section>
-
-    <section id="newsletter" class="animate__animated animate__fadeInUp">
-      <h2>Subscribe to Our Newsletter</h2>
-      <form id="newsletter-form" novalidate>
-        <label for="newsletter-email">Email Address</label>
-        <input type="email" id="newsletter-email" name="newsletter-email" placeholder="Enter your email" required aria-required="true" />
-        <span class="error-message" id="newsletter-error" aria-live="polite"></span>
-        <button type="submit" class="btn">Subscribe</button>
-      </form>
-    </section>
-
-    <section id="contact-cta" class="animate__animated animate__fadeInUp">
-      <h2>Get in Touch</h2>
-      <p>Have questions or want to partner with us? <a href="contact.html">Contact us today</a>.</p>
+      <p>SecureLink, a project under Primers Organisation, delivers multi-device emergency broadcast systems across Africa, designed for speed, security, and sovereignty.</p>
     </section>
   </main>
 
-  <footer role="contentinfo">
-    <p>📞 +234-800-SECURE &nbsp;|&nbsp; ✉️ <a href="mailto:securelink.primersorganization@gmail.com">securelink.primersorganization@gmail.com</a></p>
-    <p>&copy; 2025 SecureLink — <a href="https://primersorganization.ng.com">primersorganization.ng.com</a></p>
+  <footer>
+    <p>📞 +234-800-SECURE | ✉️ <a href="mailto:securelink.primersorganization@gmail.com">securelink.primersorganization@gmail.com</a></p>
+    <p>© 2025 SecureLink — <a href="https://primersorganization.ng.com">primersorganization.ng.com</a></p>
   </footer>
 </body>
 </html>
